@@ -5,8 +5,8 @@
 
 	<groupId>com.training</groupId>
 	<artifactId>microservicesBoot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>0.0.4-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<name>microservicesBoot</name>
 	<description>Demo project for Spring Boot</description>
@@ -37,8 +37,8 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>1.5.3.RELEASE</version>
 		</dependency>
 
 		<!--<dependency>-->

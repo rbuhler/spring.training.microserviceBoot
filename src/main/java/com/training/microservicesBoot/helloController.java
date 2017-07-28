@@ -10,15 +10,23 @@ import java.util.Map;
 @Controller
 public class helloController{
 
-    @RequestMapping("/step3/{name}")
+    @RequestMapping("/step4/{name}")
     public String infoHTML(Map model, @PathVariable String name){
         String message ="Step 4 - Response HTML with path variable.";
         model.put("name", name);
 
-        System.out.println("[STEP3] Parameter \"name\" : " + name);
-
         return "hello";
     }
+
+//    @RequestMapping("/step3/{name}")
+//    public String infoHTML(Map model, @PathVariable String name){
+//        String message ="Step 4 - Response HTML with path variable.";
+//        model.put("name", name);
+//
+//        System.out.println("[STEP3] Parameter \"name\" : " + name);
+//
+//        return "hello";
+//    }
 
     @RequestMapping("/step2/{name}")
     public @ResponseBody String hiThere(Map model, @PathVariable String name){

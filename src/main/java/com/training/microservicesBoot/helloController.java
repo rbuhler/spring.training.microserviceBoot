@@ -15,6 +15,8 @@ public class helloController{
         String message ="Step 4 - Response HTML with path variable.";
         model.put("name", name);
 
+        System.out.println("[STEP3] Parameter \"name\" : " + name);
+
         return "hello";
     }
 

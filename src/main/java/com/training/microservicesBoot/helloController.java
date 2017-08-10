@@ -12,7 +12,7 @@ public class helloController{
 
     @RequestMapping("/step4/{name}")
     public String infoHTML(Map model, @PathVariable String name){
-        String message ="Step 4 - Response HTML with path variable.";
+        String message ="Step 4 - Response JSP with path variable.";
         model.put("name", name);
 
         return "hello";

@@ -12,7 +12,30 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "base"
+ 
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+  	config.proxy.http     = "http://proxy.wdf.sap.corp:8080"     
+	config.proxy.https    = "http://proxy.wdf.sap.corp:8080"     
+	config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+  end
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.box_check_update = true
+
+  # GIT
+  config.vm.provision "shell", inline: <<-SHELL     
+  	sudo apt-get update     
+	sudo apt-get install -y git     
+	mkdir -p ~/.ssh     
+	chmod 700 ~/.ssh     
+	ssh-keyscan -H github.com >> ~/.ssh/known_hosts     
+	ssh -T git@github.com 
+  SHELL
+
+  # DOCKER
+  config.vm.provision "docker" do |d|
+  	d.build_image "/vagrant/app"   
+  end
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

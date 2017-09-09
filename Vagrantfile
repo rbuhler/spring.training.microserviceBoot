@@ -15,26 +15,19 @@ Vagrant.configure("2") do |config|
  
   if Vagrant.has_plugin?("vagrant-proxyconf")
   	config.proxy.http     = "http://proxy.wdf.sap.corp:8080"     
-	config.proxy.https    = "http://proxy.wdf.sap.corp:8080"     
-	config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+	  config.proxy.https    = "http://proxy.wdf.sap.corp:8080"     
+	  config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
   end
-  config.vm.box = "ubuntu/trusty64"
-  config.vm.box_check_update = true
+  config.vm.box = "bento/ubuntu-16.10"
+  config.vm.box_check_update = false
 
-  # GIT
-  config.vm.provision "shell", inline: <<-SHELL     
-  	sudo apt-get update     
-	sudo apt-get install -y git     
-	mkdir -p ~/.ssh     
-	chmod 700 ~/.ssh     
-	ssh-keyscan -H github.com >> ~/.ssh/known_hosts     
-	ssh -T git@github.com 
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+
+  config.vm.provision "shell", inline: <<-SHELL
+   sudo apt-get update
+   sudo apt-get install -y postgresql
+
   SHELL
-
-  # DOCKER
-  config.vm.provision "docker" do |d|
-  	d.build_image "/vagrant/app"   
-  end
 
 
   # Disable automatic box update checking. If you disable this, then

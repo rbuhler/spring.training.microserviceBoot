@@ -1,6 +1,14 @@
 package com.training.microservicesBoot.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Player {
+
+    @Id @GeneratedValue
+    Long Id;
     String name;
     String position;
 
@@ -10,7 +18,6 @@ public class Player {
 
     public Player(String name, String position) {
         this();
-
         this.name = name;
         this.position = position;
     }

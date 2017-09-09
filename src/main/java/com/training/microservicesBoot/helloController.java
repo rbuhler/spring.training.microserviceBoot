@@ -1,37 +1,31 @@
 package com.training.microservicesBoot;
 
-import com.training.microservicesBoot.domain.Player;
+import com.training.microservicesBoot.DAO.TeamDAO;
 import com.training.microservicesBoot.domain.Team;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.PostConstruct;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class helloController{
 
-    private Team team;
+   @Autowired
+    TeamDAO teamDAO;
 
-    @PostConstruct
-    public void init(){
-        Set<Player> players = new HashSet<>();
-        players.add(new Player("Charlie Brown", "pitcher"));
-        players.add(new Player("Snoopy", "shortstop"));
-
-        team = new Team("California", "Peanuts", players);
-
+    @RequestMapping("/step6/{name}")
+    public @ResponseBody Team hiJPA( @PathVariable String name ) {
+        return teamDAO.findByName(name);
     }
 
-    @RequestMapping("/step5")
-    public @ResponseBody Team hiThere() {
-
-        return team;
-    }
+//    @RequestMapping("/step5")
+//    public @ResponseBody Team hiThere() {
+//
+//        return team;
+//    }
 
     @RequestMapping("/step4/{name}")
     public String infoHTML(Map model, @PathVariable String name){
